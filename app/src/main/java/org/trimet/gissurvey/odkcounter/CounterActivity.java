@@ -27,6 +27,10 @@ public class CounterActivity extends AppCompatActivity {
         remove = (ImageButton) findViewById(R.id.remove_one);
         add = (ImageButton) findViewById(R.id.add_one);
         textView = (TextView) findViewById(R.id.counter);
+        removeJumper = (ImageButton) findViewById(R.id.remove_one_jumper);
+        addJumper = (ImageButton) findViewById(R.id.add_one_jumper);
+        textViewJumper = (TextView) findViewById(R.id.jumpers);
+
         remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,20 +51,26 @@ public class CounterActivity extends AppCompatActivity {
         });
 
 
-    }
-    /*@Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Log.d("counterLog", "has fare:" + counter.toString()
-        );
+        removeJumper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        Intent intent = new Intent();
-        int result = this.RESULT_OK;
-        intent.putExtra("has_fare", counter);
-        intent.putExtra("jumpers",0);
-        this.setResult(result, intent);
-        this.finish();
-    }*/
+                if (counterJumper > 0) {
+                    counterJumper = counterJumper - 1;
+                    textViewJumper.setText(counterJumper.toString());
+                }
+            }
+        });
+
+        addJumper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                counterJumper = counterJumper + 1;
+                textViewJumper.setText(counterJumper.toString());
+            }
+        });
+    }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -72,7 +82,7 @@ public class CounterActivity extends AppCompatActivity {
             Intent intent = new Intent();
             int result = this.RESULT_OK;
             intent.putExtra("has_fare", counter);
-            intent.putExtra("jumpers",0);
+            intent.putExtra("jumpers",counterJumper);
             this.setResult(result, intent);
             this.finish();
         }
